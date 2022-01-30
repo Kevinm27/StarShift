@@ -1,5 +1,4 @@
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map.Entry;
 import java.util.Scanner;
 import java.io.File;
@@ -39,7 +38,7 @@ public class FileReader {
 			System.out.println("An error occurred.");
 			e.printStackTrace();
 		}
-		HashMap<Integer, String> sort = SortHash.sortByValue(dataVal);
+		HashMap<Integer, String> sort = SortHash.sortByValue(dataVal);			//sort the retreived info and return it
 		return sort;
 	}
 	public static int getMin(HashMap<Integer, String> data) {
@@ -60,40 +59,42 @@ public class FileReader {
 		String userName;
 		Scanner myObj = new Scanner(System.in);
 		int min = 0;
-		if(data.size() < 10) {
+		if(data.size() < 10) {						//Making the max number of people on the leaderboard 10
 			System.out.print("Enter your Name: ");
 			userName = myObj.nextLine();
-			data.put(score, userName);
+			data.put(score, userName);				//if there is less than 10 then just add to the leaderboard
 		}
 		else {
-			for(Entry<Integer, String> entry : data.entrySet()) {
+			for(Entry<Integer, String> entry : data.entrySet()) {		//check if the new score is bigger than any other
 				if(score > entry.getKey()) {
 					System.out.print("Enter your Name: ");
 					userName = myObj.nextLine();
 					myObj.close();
 					data.put(score, userName);
-					min = getMin(data);	
+					min = getMin(data);				//because the leaderboard shifts down with every new score all i need
+													//to do is get rid of the smallest score
 					data.remove(min);
 				}
 			}	
 		}
-		data = SortHash.sortByValue(data);
+		data = SortHash.sortByValue(data);			//store the sorted data so that we can put it back into the file
 
 		File leaderboard = new File("C:\\Users\\maldo\\git\\StarShift\\Media\\leaderboard.txt");
-		leaderboard.delete();
+		leaderboard.delete();						//we delete the existng leaderboard file after already storing the info
 		try {
-			leaderboard.createNewFile();
+			leaderboard.createNewFile();			//then open the same text file so we can store the new information
 		} catch (IOException e1) {
 			System.out.println("Could not create File.");
 			e1.printStackTrace();
 		}
 		try {
 			FileOutputStream editedLeaderboard = new FileOutputStream(leaderboard, true);
-			byte[] bytes;
+			byte[] bytes;							//once the new file is open we can now write the info to it
 			for(Entry<Integer, String> entry : data.entrySet()) {
 				
-				bytes = (entry.getValue().replaceAll(" ", "") + " " + entry.getKey() + "\n" ).getBytes();
-				try {
+				bytes = (entry.getValue().replaceAll(" ", "") + " " + entry.getKey() + "\n" ).getBytes();	//use a for loop to go through the hash map
+				try {																			//this will allow me to assign new info to bytes 
+																								//and write it every iteration
 					editedLeaderboard.write(bytes);
 				} catch (IOException e) {
 					System.out.println("Could not write to file.");
@@ -112,7 +113,7 @@ public class FileReader {
 			System.out.println("Could not edit file.");
 			e.printStackTrace();
 		}
-		data = SortHash.sortByValue(data);
+	//	data = SortHash.sortByValue(data);													//sort the hash
 
 		return data;
 	}

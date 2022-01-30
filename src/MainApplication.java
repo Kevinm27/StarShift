@@ -20,6 +20,8 @@ public class MainApplication extends GraphicsProgram implements KeyListener{
 	private OptionsMenu options;
 	private GameOverPane gameOver;
 	private Level endless;	
+	private Leaderboard board;
+	
 	
 	/* Method: setupInteractions
 	 * -------------------------
@@ -83,6 +85,7 @@ public class MainApplication extends GraphicsProgram implements KeyListener{
 		shipCustom = new ShipCustomPane(this);
 		gameOver = new GameOverPane(this);
 		endless = new Level(this, player);
+		board = new Leaderboard(this);
 		setupInteractions();
 		switchToMenu();
 	}
@@ -101,6 +104,9 @@ public class MainApplication extends GraphicsProgram implements KeyListener{
 	
 	public void switchToOptions() {
 		switchToScreen(options);
+	}
+	public void switchToLeaderboard() {
+		switchToScreen(board);
 	}
 	
 	public void switchToGameOver() {
