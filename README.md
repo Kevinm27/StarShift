@@ -18,7 +18,7 @@ I will probably have to change existing files as well (if some are changed and n
 	- Level: the score is resetted every time the player dies, so I changed it when the game starts so I can access old scores
 	- MainApplication: Added the reset score function to when the game actually starts.
 	
-
+PART 2
 	PsuedoCode:
 		SortHash: Taken from GeeksForGeeks as shown in the source file itself
 			According to GeeksForGeeks: the idea of this sorting algorithm is to first store the entry set into a lost and sort the list based on the integers I stored into it previously
@@ -63,4 +63,10 @@ I will probably have to change existing files as well (if some are changed and n
 		- Create GLabel[] playerName[10] and playerScore[10]
 		-	use a for loop when first going through the constructor which will add the balues and scores from the hashmap using getter from FileReader into the array of labels.
 		- Make sure to add and remove the right amount of playerNames and scores because there could be only 9 names out of 10 and accessing the tenth will be null
+
+------------
+PART 3
+	- The way the file system works is that the file is read and parsed into a hashmap. 
+	- To test the implementation just follow the steps after the game ends. Just play the game normally, and once you die it will change the screen if youre score is higher than any of the local scores.
+	- To input your name, you must first click on the text that says "Click me to enter"(this was included because the game would switch to fast and I would have extra characters on accident too often). After you click it just click on the console and type your name with an endline after the last character. From here it should send you to the leaderboard with your name in it. You can also view the leaderboard from the main menu. 
 		
