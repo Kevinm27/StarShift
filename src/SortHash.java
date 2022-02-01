@@ -19,7 +19,7 @@ public class SortHash {
 			    public int compare(Map.Entry<Integer, String> o1,
 			                       Map.Entry<Integer, String> o2)
 			    {
-			        return (o1.getKey()).compareTo(o2.getKey());
+			        return (o2.getKey()).compareTo(o1.getKey());
 			    }
 			});
 			 

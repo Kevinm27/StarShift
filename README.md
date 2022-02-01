@@ -21,4 +21,46 @@ I will probably have to change existing files as well (if some are changed and n
 
 	PsuedoCode:
 		SortHash: Taken from GeeksForGeeks as shown in the source file itself
+			According to GeeksForGeeks: the idea of this sorting algorithm is to first store the entry set into a lost and sort the list based on the integers I stored into it previously
+			 - List<Map<int, string>> list = new LinkedList<map.entry<string, int>> hm.entrySet
+			Now to actually sort it 
+			Collections.sort(list, new Comparator<Map<string, int>>(){
+				public int compare(map<string, int> o1, map<string, int> o2){
+					return the biggest of the two o1 & o2
+				}
+			});
+			
+			Make a new hashmap and store the new values inside it using a for loop
+			HashMap<int, string> temp
+			for(map.entry aa : list)
+				temp.put(key, value)
+			
+			return temp
+			---------------------------------
+		EnterName: Simple screen but personally there is some complexity to it
+		So Far I will just create a new screen with the same background but instead of asking the user to input their name into the terminal, I want to display it onto the screen.
+		Add MainApplcation, background, congratulations message, a label to: enter a name, submit the name. Finally, add a string so we can see what the user is typing
+		the constructor should just place all the labels in whatever spot you feel like putting.
+		Showcontents should be included and don't forget to override it
+		Same goes with hidecontents
+		Same goes with mousePressed but create a Gobject that stores where the user clicked and if it clicks the submit name label then it call the FileReader file and run the function that inputs a new score with the name just types
+		There should be a class called TAdapter which I got from level. It should look something like this
+		- private class TAdapter extends KeyAdapter implements KeyListener{
+			@override
+			public void KeyTyped(KeyEvent e){
+				int key = e.getKeyCode
+				check the key to see if it matches either the backspace or enter button
+				if it hits any key then just add it to the string we created earlier called input or something
+				NOTE: SO FAR THIS DOES NOT WORK
+			}
+		}
+		Afterwards it will switch to the leaderboard screen
+		------------------------------------------
+		Leaderboard: Very simple screen to create after all getters are properly created.
+		Add all the basic Labels, Fonts, Colors Show contents just like the Enter name file
+		Only difference is the face that we are adding a dynamic number of names and scores
+		-	Create a hashmap, this will store the data that will be grabbed from FileReader later
+		- Create GLabel[] playerName[10] and playerScore[10]
+		-	use a for loop when first going through the constructor which will add the balues and scores from the hashmap using getter from FileReader into the array of labels.
+		- Make sure to add and remove the right amount of playerNames and scores because there could be only 9 names out of 10 and accessing the tenth will be null
 		
