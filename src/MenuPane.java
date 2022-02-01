@@ -14,6 +14,7 @@ public class MenuPane extends GraphicsPane {
 	private GImage background;
 	private GLabel playGame;
 	private GLabel shipCustom;
+	private GLabel leaderboard;
 	private GLabel options;
 	private GLabel exit;
 	private boolean exitBool;
@@ -38,11 +39,15 @@ public class MenuPane extends GraphicsPane {
 		shipCustom.setFont(space);
 		shipCustom.setColor(purple);
 		
-		options = new GLabel("Options", app.getWidth()/2- 2* 50 + 50, app.getHeight()/2);
+		leaderboard = new GLabel("Leaderboard", app.getWidth()/2 - 2*50 + 40, app.getHeight()/2);
+		leaderboard.setFont(space);
+		leaderboard.setColor(purple);
+		
+		options = new GLabel("Options", app.getWidth()/2- 2* 50 + 50, app.getHeight()/2 + 50);
 		options.setFont(space);
 		options.setColor(purple);
 		
-		exit = new GLabel("Exit", app.getWidth()/2-50/2 - 10, app.getHeight()/2 + 50);
+		exit = new GLabel("Exit", app.getWidth()/2-50/2 - 10, app.getHeight()/2 + 100);
 		exit.setFont(space);
 		exit.setColor(purple);
 		
@@ -72,6 +77,7 @@ public class MenuPane extends GraphicsPane {
 		program.add(playGame);
 		program.add(shipCustom);
 		program.add(options);
+		program.add(leaderboard);
 		program.add(exit);
 	}
 
@@ -84,6 +90,7 @@ public class MenuPane extends GraphicsPane {
 		program.remove(playGame);
 		program.remove(shipCustom);
 		program.remove(options);
+		program.remove(leaderboard);
 		program.remove(exit);
 	}
 
@@ -103,7 +110,9 @@ public class MenuPane extends GraphicsPane {
 		else if (obj == options) {
 			program.switchToOptions();
 		}
-		
+		else if(obj == leaderboard) {
+			program.switchToLeaderboard();
+		}
 		else if(obj == exit) {
 			exitBool = true;
 			background.sendToFront();

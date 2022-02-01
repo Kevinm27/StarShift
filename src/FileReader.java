@@ -55,21 +55,35 @@ public class FileReader {
 		}
 		return temp;
 	}
-	public static HashMap<Integer, String> inputNewScore(int score, HashMap<Integer, String> data){
-		String userName;
-		Scanner myObj = new Scanner(System.in);
+	public static boolean isAHigherScore(int score) {
+		HashMap<Integer, String> data = new HashMap<Integer, String>();
+		data = grabInfoFromFile();
+		if(data.size() == 0) {
+			return true;
+		}
+		for(Entry<Integer, String> entry: data.entrySet()) {
+			if(score > entry.getKey()) {
+				return true;
+			}
+		}
+		return false;
+		
+	}
+	public static void inputNewScore(int score,  String userName){
+		HashMap<Integer, String> data = new HashMap<Integer, String>();
+		//Scanner myObj = new Scanner(System.in);
 		int min = 0;
 		if(data.size() < 10) {						//Making the max number of people on the leaderboard 10
-			System.out.print("Enter your Name: ");
-			userName = myObj.nextLine();
+			//System.out.print("Enter your Name: ");
+			//userName = myObj.nextLine();
 			data.put(score, userName);				//if there is less than 10 then just add to the leaderboard
 		}
 		else {
 			for(Entry<Integer, String> entry : data.entrySet()) {		//check if the new score is bigger than any other
 				if(score > entry.getKey()) {
-					System.out.print("Enter your Name: ");
-					userName = myObj.nextLine();
-					myObj.close();
+					//System.out.print("Enter your Name: ");
+					//userName = myObj.nextLine();
+					//myObj.close();
 					data.put(score, userName);
 					min = getMin(data);				//because the leaderboard shifts down with every new score all i need
 													//to do is get rid of the smallest score
@@ -80,7 +94,7 @@ public class FileReader {
 		data = SortHash.sortByValue(data);			//store the sorted data so that we can put it back into the file
 
 		File leaderboard = new File("C:\\Users\\maldo\\git\\StarShift\\Media\\leaderboard.txt");
-		leaderboard.delete();						//we delete the existng leaderboard file after already storing the info
+		leaderboard.delete();						//we delete the existing leaderboard file after already storing the info
 		try {
 			leaderboard.createNewFile();			//then open the same text file so we can store the new information
 		} catch (IOException e1) {
@@ -113,16 +127,14 @@ public class FileReader {
 			System.out.println("Could not edit file.");
 			e.printStackTrace();
 		}
-	//	data = SortHash.sortByValue(data);													//sort the hash
 
-		return data;
 	}
 	
 
 	public static void main(String[] args){
 		HashMap<Integer, String> rando = new HashMap<Integer, String>();
 		rando = grabInfoFromFile();
-		rando = inputNewScore(100, rando);
+		//rando = inputNewScore(100, rando);
 
 	}
 		

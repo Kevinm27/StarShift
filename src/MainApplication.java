@@ -20,6 +20,7 @@ public class MainApplication extends GraphicsProgram implements KeyListener{
 	private OptionsMenu options;
 	private GameOverPane gameOver;
 	private Level endless;	
+	private EnterName name;
 	private Leaderboard board;
 	
 	
@@ -86,6 +87,7 @@ public class MainApplication extends GraphicsProgram implements KeyListener{
 		gameOver = new GameOverPane(this);
 		endless = new Level(this, player);
 		board = new Leaderboard(this);
+		name = new EnterName(this);
 		setupInteractions();
 		switchToMenu();
 	}
@@ -95,6 +97,7 @@ public class MainApplication extends GraphicsProgram implements KeyListener{
 	}
 	
 	public void switchToPlayGameMenu() {
+		Score.resetScore();
 		switchToScreen(playGameScn);
 	}
 	
@@ -108,7 +111,9 @@ public class MainApplication extends GraphicsProgram implements KeyListener{
 	public void switchToLeaderboard() {
 		switchToScreen(board);
 	}
-	
+	public void switchToEnterName() {
+		switchToScreen(name);
+	}
 	public void switchToGameOver() {
 		switchToScreen(gameOver);
 	}

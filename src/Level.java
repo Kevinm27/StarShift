@@ -296,7 +296,14 @@ public class Level extends GraphicsPane implements KeyListener, ActionListener{
 			gameOverLabel.sendToFront();
 			gameOverLabel.setVisible(true);
 			
-			program.switchToGameOver();
+			//program.switchToGameOver();
+			if(FileReader.isAHigherScore(50000/*Score.getScore()*/)) {
+				program.switchToEnterName();
+			}
+			else {
+				Score.resetScore();
+				program.switchToGameOver();	
+			}
 		}
 		
 		moveAllProjectiles();
@@ -367,7 +374,6 @@ public class Level extends GraphicsPane implements KeyListener, ActionListener{
 	 * KeyListeners, then starts the game timer.
 	 */
 	private void initLevel() {
-		Score.resetScore();
 		program.addKeyListeners(new TAdapter());
 		playArea = new GRect(LEVEL_BOUNDS_LEFT, LEVEL_BOUNDS_TOP, LEVEL_BOUNDS_RIGHT, LEVEL_BOUNDS_BOTTOM);
 		playArea.setLineWidth(2);

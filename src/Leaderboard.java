@@ -8,18 +8,19 @@ import acm.graphics.GImage;
 import acm.graphics.GLabel;
 import acm.graphics.GObject;
 
-public class Leaderboard extends GraphicsPane {
+public class Leaderboard extends GraphicsPane{
 	
 	// you will use program to get access to all of the GraphicsProgram calls
 	private MainApplication program; 
 								
 	private GImage background;
 	private GLabel leaderboard;
-	private GLabel name;
+	private GLabel userName;
 	private GLabel score;
 	private GLabel [] playerNames = new GLabel[10];
 	private GLabel[] playerScore = new GLabel[10];
 	private GLabel back;
+
 	
 	private HashMap<Integer, String> scores = new HashMap<Integer, String>();
 
@@ -37,18 +38,28 @@ public class Leaderboard extends GraphicsPane {
 		leaderboard.setFont(space);
 		leaderboard.setColor(purple);
 		
-		name = new GLabel("User-Names", app.getWidth()/2 - 250, app.getHeight()/2 - 50 * 4);
-		name.setFont(space);
-		name.setColor(purple);
+		userName = new GLabel("User-Names", app.getWidth()/2 - 250, app.getHeight()/2 - 50 * 4);
+		userName.setFont(space);
+		userName.setColor(purple);
 		
 		score = new GLabel("Scores", app.getWidth() / 2 + 200, app.getHeight()/2 - 50 * 4);
 		score.setFont(space);
 		score.setColor(purple);
 		
-		back = new GLabel("Return", app.getWidth() / 2, app.getHeight() / 2 + 200);
+		back = new GLabel("Return", app.getWidth() / 2 - 50, app.getHeight() / 2 + 100);
 		back.setFont(space);
 		back.setColor(purple);
-		
+		/*
+		if(FileReader.isAHigherScore(Score.getScore())) {
+			FileReader.inputNewScore(Score.getScore(), scores);
+			enterName = new GLabel("Enter your name: ", app.getWidth()/2 - 250, app.getHeight()/ 2 - 50 * 4);
+			enterName.setFont(space);
+			enterName.setColor(purple);
+			
+			
+
+		}
+		*/
 		scores = FileReader.grabInfoFromFile();
 		int yCord = 100;
 		int i = 0;
@@ -64,32 +75,40 @@ public class Leaderboard extends GraphicsPane {
 		}
 		
 	}
+	
+	
 
 	@Override
 	public void showContents() {
 		program.add(background);
 		program.add(leaderboard);
-		program.add(name);
+		program.add(userName);
 		program.add(score);
 		program.add(back);
-		for(int i = 0; i < 10; i++) {
-			program.add(playerNames[i]);
-			program.add(playerScore[i]);
-		}
+		if(scores.size() > 0) {
+			for(int i = 0; i < scores.size(); i++) {
+				program.add(playerNames[i]);
+				program.add(playerScore[i]);
+			}
+		}	
 	}
 
 	@Override
 	public void hideContents() {
 		program.remove(background);
 		program.remove(leaderboard);
-		program.remove(name);
+		program.remove(userName);
 		program.remove(score);
 		program.remove(back);
-		for(int i = 0; i < 10; i++) {
-			program.add(playerNames[i]);
-			program.remove(playerScore[i]);
+		if(scores.size() > 0) {
+			for(int i = 0; i < scores.size(); i++) {
+				program.remove(playerNames[i]);
+				program.remove(playerScore[i]);
+			}
 		}
 	}
+	
+
 
 	@Override
 	public void mousePressed(MouseEvent e) {
@@ -98,7 +117,6 @@ public class Leaderboard extends GraphicsPane {
 		if(obj == back) {
 			program.switchToMenu();
 		}
-		
 		
 	}
 }
