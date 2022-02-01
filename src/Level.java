@@ -31,7 +31,7 @@ public class Level extends GraphicsPane implements KeyListener, ActionListener{
 	private ArrayList<Enemy> enemies = new ArrayList<>();
 	private ArrayList<Projectile> allBullets = new ArrayList<>();
 	private ArrayList<PowerUp> powerUps = new ArrayList<>();
-	
+	public static int updatedScore;
 	private Score score;
 	private PlayerShip player;
 	private PlayerHealthBar playerHP;
@@ -292,12 +292,9 @@ public class Level extends GraphicsPane implements KeyListener, ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		
 		if(isLevelLost()) { //checks if player has died
-			uniTimer.stop();
-			gameOverLabel.sendToFront();
-			gameOverLabel.setVisible(true);
-			
+			uniTimer.stop();			
 			//program.switchToGameOver();
-			if(FileReader.isAHigherScore(50000/*Score.getScore()*/)) {
+			if(FileReader.isAHigherScore(updatedScore)) {
 				program.switchToEnterName();
 			}
 			else {
@@ -323,6 +320,9 @@ public class Level extends GraphicsPane implements KeyListener, ActionListener{
 	                }
 	                
 	               // System.out.println(enemies.size());
+	            }
+	            if(timeCounter % 1 == 0) {
+	            	score.updateScore(1);
 	            }
 			}
             //resetting secondCounter because every 50 passes through

@@ -38,6 +38,8 @@ public class Score {
 		text.setLabel("Score: " + score);
 		upCombo();
 		GameOverPane.scoreLabel.setLabel("Final score: " + score);
+		EnterName.score.setLabel("Final Score: " + score);
+		Level.updatedScore = score;
 	}
 	
 	

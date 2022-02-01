@@ -97,7 +97,7 @@ public class MainApplication extends GraphicsProgram implements KeyListener{
 	}
 	
 	public void switchToPlayGameMenu() {
-		Score.resetScore();
+		//Score.resetScore();
 		switchToScreen(playGameScn);
 	}
 	

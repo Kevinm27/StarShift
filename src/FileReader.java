@@ -71,6 +71,7 @@ public class FileReader {
 	}
 	public static void inputNewScore(int score,  String userName){
 		HashMap<Integer, String> data = new HashMap<Integer, String>();
+		data = grabInfoFromFile();
 		//Scanner myObj = new Scanner(System.in);
 		int min = 0;
 		if(data.size() < 10) {						//Making the max number of people on the leaderboard 10
