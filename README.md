@@ -59,7 +59,7 @@ I will probably have to change existing files as well (if some are changed and n
 		Leaderboard: Very simple screen to create after all getters are properly created.
 		Add all the basic Labels, Fonts, Colors Show contents just like the Enter name file
 		Only difference is the face that we are adding a dynamic number of names and scores
-		-	Create a hashmap, this will store the data that will be grabbed from FileReader later
+	-	Create a hashmap, this will store the data that will be grabbed from FileReader later
 		- Create GLabel[] playerName[10] and playerScore[10]
 		-	use a for loop when first going through the constructor which will add the balues and scores from the hashmap using getter from FileReader into the array of labels.
 		- Make sure to add and remove the right amount of playerNames and scores because there could be only 9 names out of 10 and accessing the tenth will be null

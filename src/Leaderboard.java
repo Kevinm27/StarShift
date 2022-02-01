@@ -21,15 +21,19 @@ public class Leaderboard extends GraphicsPane{
 	private GLabel[] playerScore = new GLabel[10];
 	private GLabel back;
 
+	private Font space = new Font("Space", Font.PLAIN, 24);
+	private Color purple = new Color(128,0,128);
 	
 	private HashMap<Integer, String> scores = new HashMap<Integer, String>();
-
+	private double appWidth;
+	private double appHeight;
 
 	public Leaderboard(MainApplication app) {
 		super();
 		program = app;
-		Font space = new Font("Space", Font.PLAIN, 24);
-		Color purple = new Color(128,0,128);
+		
+		appWidth = app.getWidth();
+		appHeight = app.getHeight();
 		
 		background = new GImage("Background.jpg");
 		background.setSize(MainApplication.WINDOW_WIDTH, MainApplication.WINDOW_HEIGHT);
@@ -49,46 +53,41 @@ public class Leaderboard extends GraphicsPane{
 		back = new GLabel("Return", app.getWidth() / 2 - 50, app.getHeight() / 2 + 100);
 		back.setFont(space);
 		back.setColor(purple);
-		/*
-		if(FileReader.isAHigherScore(Score.getScore())) {
-			FileReader.inputNewScore(Score.getScore(), scores);
-			enterName = new GLabel("Enter your name: ", app.getWidth()/2 - 250, app.getHeight()/ 2 - 50 * 4);
-			enterName.setFont(space);
-			enterName.setColor(purple);
-			
-			
-
-		}
-		*/
 		scores = FileReader.grabInfoFromFile();
-		int yCord = 100;
-		int i = 0;
-		for(Entry<Integer, String> entry : scores.entrySet()) {
-			playerNames[i] = new GLabel(entry.getValue(), app.getWidth()/2 - 250, app.getHeight() / 2 + yCord);
-			playerNames[i].setFont(space);
-			playerNames[i].setColor(purple);
-			playerScore[i] = new GLabel(Integer.toString(entry.getKey()), app.getWidth() / 2 + 50 * 4, app.getHeight() / 2 + yCord);
-			playerScore[i].setFont(space);
-			playerScore[i].setColor(purple);
-			yCord -= 30;
-			i++;
-		}
+		
+		
 		
 	}
 	
+	public void displayData() {
+		scores = FileReader.grabInfoFromFile();
+		int yCord = 0;
+		int i = 0;
+		for(Entry<Integer, String> entry : scores.entrySet()) {
+			playerNames[i] = new GLabel(entry.getValue(), appWidth/2 - 250, appHeight / 2 - 150 + yCord);
+			playerNames[i].setFont(space);
+			playerNames[i].setColor(purple);
+			playerScore[i] = new GLabel(Integer.toString(entry.getKey()), appWidth / 2 + 50 * 4, appHeight / 2 - 150 + yCord);
+			playerScore[i].setFont(space);
+			playerScore[i].setColor(purple);
+			yCord += 30;
+			i++;
+		}
+	}
 	
 
 	@Override
 	public void showContents() {
+		displayData();
 		program.add(background);
 		program.add(leaderboard);
 		program.add(userName);
 		program.add(score);
 		program.add(back);
 		if(scores.size() > 0) {
-			for(int i = 0; i < scores.size(); i++) {
-				program.add(playerNames[i]);
-				program.add(playerScore[i]);
+			for(int j = 0; j < scores.size(); j++) {
+				program.add(playerNames[j]);
+				program.add(playerScore[j]);
 			}
 		}	
 	}

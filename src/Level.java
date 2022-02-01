@@ -181,7 +181,7 @@ public class Level extends GraphicsPane implements KeyListener, ActionListener{
 											}
 											program.remove(enemies.get(j).getImage());
 											enemies.remove(j);
-											score.updateScore(10);
+											score.updateScore(100);
 										}
 										program.remove(allBullets.get(i).getOval());
 										allBullets.remove(i);
@@ -301,7 +301,6 @@ public class Level extends GraphicsPane implements KeyListener, ActionListener{
 				program.switchToEnterName();
 			}
 			else {
-				Score.resetScore();
 				program.switchToGameOver();	
 			}
 		}
